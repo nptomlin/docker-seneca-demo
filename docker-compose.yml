@@ -1,0 +1,19 @@
+beanstalk:
+  build: ./infrastructure/beanstalk
+  expose:
+    - "11300:11300"
+
+pong:
+  build: ./srvs/pong
+  links: 
+    - beanstalk
+  environment:
+    SRV_HOST: beanstalk
+
+ping:
+  build: ./srvs/ping
+  links: 
+    - beanstalk
+  environment:
+    SRV_HOST: beanstalk
+
